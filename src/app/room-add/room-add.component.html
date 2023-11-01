@@ -1,0 +1,102 @@
+{{room|json}}
+
+<div class="alert alert-success">
+  {{successMsg}}
+</div>
+
+<form #roomForm="ngForm" (ngSubmit)="addRoom(roomForm)">
+  <div class="form-group">
+    <input
+    required
+    [(ngModel)]="room.roomType"
+      class="form-control"
+      type="text"
+      name="roomType"
+      placeholder="Room Type"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+    #roomAmenities="ngModel"
+    required
+    minlength="5"
+    [(ngModel)]="room.amenities" class="form-control"
+      type="text"
+      name="amenities"
+      placeholder="Amenities"
+    />
+  </div>
+
+  <div class="alert alert-danger" *ngIf="roomAmenities.errors?.['minlength']">
+    Amenities should be min 5 chars!
+    {{roomAmenities.errors|json}}
+  </div>
+
+  <div  *ngIf="roomAmenities.dirty && roomAmenities.errors?.['required']">
+    Please provide the Amenities
+  </div>
+
+  <div class="form-group">
+    <input
+    required
+    [(ngModel)]="room.price"
+      class="form-control"
+      type="text"
+      name="price"
+      placeholder="Room Price per night"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+    required
+      [(ngModel)]="room.photos"
+      class="form-control"
+      type="text"
+      name="photos"
+      placeholder="Photos (Provide link)"
+
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      required
+      [(ngModel)]="room.checkinTime"
+      class="form-control"
+      type="dateTime"
+      name="CheckinTime"
+      placeholder="Check-in Time"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+    required
+    [(ngModel)]="room.checkoutTime"
+      class="form-control"
+      type="dateTime"
+      name="CheckoutTime"
+      placeholder="Check-out Time"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+    min="1"
+    max="5"
+    required
+    [(ngModel)]="room.rating"
+      class="form-control"
+      type="number"
+      name="rating"
+      placeholder="Rating"
+    />
+  </div>
+
+  <div>
+    <button [disabled]="roomForm.invalid" class="btn btn-primary" type="submit">Submit</button>
+  </div>
+
+</form>

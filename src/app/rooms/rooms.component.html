@@ -1,0 +1,33 @@
+<h1>hello word</h1>
+<app-header></app-header>
+
+<div *ngIf="selected">
+  {{selected|json}}
+</div>
+
+<div>
+  <button (click)="addRoom()">add</button>
+</div>
+
+{{priceFilter.value|json}}
+<div>
+  <input type="number" class="form-control" placeholder="price" [formControl]="priceFilter">
+</div>
+
+<div *ngIf="rooms.available>0" [hidden]="vis">
+  nb rooms:
+  <p>{{nbRooms}}</p>
+</div>
+
+{{getError$|async}}
+<h1>
+  nb rooms: {{countRooms$|async}}
+</h1>
+<app-room-list [rooms]="rooms2$|async" (selectedRooms)="selectRooms($event)"  [title]="title"></app-room-list>
+
+
+<button class="btn btn-primary" (click)="change()">Click</button>
+<button class="btn btn-primary" (click)="edit()">edit Room</button>
+<button class="btn btn-primary" (click)="delete()">delete Room</button>
+
+<router-outlet></router-outlet>
